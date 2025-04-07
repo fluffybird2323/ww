@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Hindu Temple</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Online Hindu Temple</h1>
+            <p>Welcome to the divine space of worship</p>
+        </header>
+
+        <main>
+            <div class="temple-section">
+                <div class="deity-selection">
+                    <h2>Select a Deity</h2>
+                    <div class="deity-grid" id="deityGrid">
+                        <!-- Deity images will be added here dynamically -->
+                    </div>
+                    
+                    <div class="custom-deity-upload">
+                        <h3>Add Your Own Deity</h3>
+                        <input type="file" id="deityUpload" accept="image/*" class="file-input">
+                        <input type="text" id="deityName" placeholder="Enter deity name" class="text-input">
+                        <button id="addDeityBtn" class="upload-btn">Add Deity</button>
+                    </div>
+                </div>
+
+                <div class="worship-area">
+                    <div class="selected-deity" id="selectedDeity">
+                        <img src="" alt="Selected Deity" id="deityImage">
+                    </div>
+
+                    <div class="offerings">
+                        <h2>Make an Offering</h2>
+                        <div class="offering-buttons" id="offeringButtons">
+                            <button class="offering-btn" data-offering="incense">Incense</button>
+                            <button class="offering-btn" data-offering="flowers">Flowers</button>
+                            <button class="offering-btn" data-offering="fruits">Fruits</button>
+                            <button class="offering-btn" data-offering="lamp">Lamp</button>
+                        </div>
+                    </div>
+
+                    <div class="offering-display" id="offeringDisplay">
+                        <!-- Offerings will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>om</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
