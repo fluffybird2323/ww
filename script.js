@@ -146,6 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.offering-buttons').classList.add('visible');
         document.querySelector('.offering-display').classList.add('visible');
         
+        // Scroll to top of the page
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
         // Add click event to close enlarged view
         selectedDeity.addEventListener('click', () => {
             selectedDeity.classList.remove('enlarged');
