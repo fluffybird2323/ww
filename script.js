@@ -140,6 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
         offeringDisplay.innerHTML = ''; // Clear previous offerings
         selectedDeity.classList.add('enlarged');
         
+        // Show the offering section
+        document.querySelector('.worship-area').classList.add('visible');
+        document.querySelector('.selected-deity').classList.add('visible');
+        document.querySelector('.offering-buttons').classList.add('visible');
+        document.querySelector('.offering-display').classList.add('visible');
+        
         // Add click event to close enlarged view
         selectedDeity.addEventListener('click', () => {
             selectedDeity.classList.remove('enlarged');
@@ -177,23 +183,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const animationContainer = document.createElement('div');
         animationContainer.className = 'offering-animation';
         
-        // Set the orbit radius to be slightly less than half the deity image height
+        // Set the orbit radius based on the deity image size
         const deityRect = deityImage.getBoundingClientRect();
-        const orbitRadius = deityRect.height * 0.4;
+        const orbitRadius = Math.min(deityRect.width, deityRect.height) * 0.3; // Reduced to 30% of the smaller dimension
         animationContainer.style.setProperty('--orbit-radius', `${orbitRadius}px`);
         
         // Create single offering item
         const item = document.createElement('img');
         item.src = offering.image;
         // Make fruits 200% bigger than other offerings
-        const size = type === 'fruits' ? '100px' : '50px';
+        const size = type === 'fruits' ? '80px' : '40px';
         item.style.width = size;
         item.style.height = size;
         item.style.objectFit = 'cover';
         item.style.borderRadius = '50%';
         item.style.position = 'absolute';
-        item.style.left = '0';
-        item.style.top = '0';
+        item.style.left = '50%';
+        item.style.top = '50%';
         item.style.transform = 'translate(-50%, -50%)';
         item.style.animation = `orbit 10.4s ease-out forwards`;
 
@@ -202,6 +208,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Attach animation container to the deity image container
         const selectedDeity = document.getElementById('selectedDeity');
         selectedDeity.appendChild(animationContainer);
+
+        // Debug logging
+        console.log('Animation container added:', {
+            deityRect,
+            orbitRadius,
+            containerPosition: selectedDeity.getBoundingClientRect(),
+            animationPosition: animationContainer.getBoundingClientRect()
+        });
 
         // Remove animation elements after completion
         setTimeout(() => {

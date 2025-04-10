@@ -101,12 +101,23 @@ header h1 {
     background: rgba(255, 215, 0, 0.1);
     border-radius: 8px;
     text-align: center;
+    display: none;
+}
+
+.worship-area.visible {
+    display: block;
 }
 
 .selected-deity {
     margin: 0 auto;
     max-width: 400px;
     position: relative;
+    border: 1px solid transparent;
+    display: none;
+}
+
+.selected-deity.visible {
+    display: block;
 }
 
 .selected-deity img {
@@ -116,15 +127,16 @@ header h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.offerings {
-    margin-top: 30px;
-}
-
 .offering-buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-top: 20px;
+    display: none;
+}
+
+.offering-buttons.visible {
+    display: flex;
 }
 
 .offering-btn {
@@ -148,6 +160,11 @@ header h1 {
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
     margin-top: 20px;
+    display: none;
+}
+
+.offering-display.visible {
+    display: grid;
 }
 
 .offering-item {
@@ -229,6 +246,18 @@ footer {
         grid-template-columns: 1fr;
         gap: 20px;
         padding: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Move worship area to the top */
+    .worship-area {
+        order: -1;
+        padding: 15px;
+    }
+
+    .deity-selection {
+        order: 1;
     }
 
     .deity-grid {
@@ -245,13 +274,11 @@ footer {
         height: auto;
     }
 
-    .worship-area {
-        padding: 15px;
-    }
-
     .selected-deity {
         margin: 0 auto;
         max-width: 300px;
+        border: 1px solid purple;
+        min-height: 200px;
     }
 
     .selected-deity img {
@@ -325,7 +352,8 @@ footer {
 /* Adjust animation for mobile */
 @media (max-width: 768px) {
     .offering-animation {
-        --orbit-radius: 120px;
+        --orbit-radius: 100px;
+        z-index: 1001;
     }
 
     .offering-animation img {
@@ -337,4 +365,22 @@ footer {
         width: 80px !important;
         height: 80px !important;
     }
+
+    .selected-deity {
+        min-height: 200px;
+    }
+}
+
+.offering-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 } 
