@@ -5,6 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Hindu Temple</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes orbit {
+            0% {
+                transform: translateY(calc(var(--orbit-radius) * 1.2)) rotate(0deg);
+                opacity: 1;
+            }
+            5% {
+                transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
+                opacity: 1;
+            }
+            95% {
+                transform: rotate(2520deg) translateX(var(--orbit-radius)) rotate(-2520deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(calc(var(--orbit-radius) * 1.2)) rotate(0deg);
+                opacity: 0;
+            }
+        }
+
+        .offering-animation {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .selected-deity {
+            position: relative;
+        }
+
+        .offering-animation img {
+            border: none;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
     <div class="container">

@@ -2,19 +2,19 @@
 const deities = [
     {
         name: 'Lord Ganesha',
-        image: 'https://raw.githubusercontent.com/your-username/your-repo/main/images/ganesha.jpg'
+        image: 'https://www.templepurohit.com/wp-content/uploads/2015/07/Lord-Ganesha-Hindu-Gods-and-Deities.jpg'
     },
     {
         name: 'Lord Shiva',
-        image: 'https://raw.githubusercontent.com/your-username/your-repo/main/images/shiva.jpg'
+        image: 'https://rukminim2.flixcart.com/image/850/1000/ked56kw0-0/poster/l/v/3/medium-god020-lord-shiva-family-wall-poster-lord-shivaji-hd-original-imafv29auterbtpj.jpeg?q=20&crop=false'
     },
     {
         name: 'Goddess Lakshmi',
-        image: 'https://raw.githubusercontent.com/your-username/your-repo/main/images/lakshmi.jpg'
+        image: 'https://i.pinimg.com/736x/56/29/86/5629863a8b88dc98f1a66e4f841ec7b8.jpg'
     },
     {
         name: 'Lord Krishna',
-        image: 'https://raw.githubusercontent.com/your-username/your-repo/main/images/krishna.jpg'
+        image: 'https://i.pinimg.com/1200x/40/60/1b/40601b0bd068ce1bcf8239afdf9a3ad7.jpg'
     }
 ];
 
@@ -22,19 +22,19 @@ const deities = [
 const offerings = {
     incense: {
         name: 'Incense',
-        image: 'https://raw.githubusercontent.com/your-username/your-repo/main/images/incense.jpg'
+        image: 'incense.png'
     },
     flowers: {
         name: 'Flowers',
-        image: 'https://raw.githubusercontent.com/your-username/your-repo/main/images/flowers.jpg'
+        image: 'flowers.png'
     },
     fruits: {
         name: 'Fruits',
-        image: 'https://raw.githubusercontent.com/your-username/your-repo/main/images/fruits.jpg'
+        image: 'fruits.png'
     },
     lamp: {
         name: 'Lamp',
-        image: 'https://raw.githubusercontent.com/your-username/your-repo/main/images/lamp.jpg'
+        image: 'lamp.png'
     }
 };
 
@@ -177,45 +177,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const animationContainer = document.createElement('div');
         animationContainer.className = 'offering-animation';
         
-        // Create offering image for animation
-        const animatedOffering = document.createElement('img');
-        animatedOffering.src = offering.image;
-        animatedOffering.style.width = '100px';
-        animatedOffering.style.height = '100px';
-        animatedOffering.style.objectFit = 'cover';
-        animatedOffering.style.borderRadius = '50%';
+        // Set the orbit radius to be slightly less than half the deity image height
+        const deityRect = deityImage.getBoundingClientRect();
+        const orbitRadius = deityRect.height * 0.4;
+        animationContainer.style.setProperty('--orbit-radius', `${orbitRadius}px`);
+        
+        // Create single offering item
+        const item = document.createElement('img');
+        item.src = offering.image;
+        // Make fruits 200% bigger than other offerings
+        const size = type === 'fruits' ? '100px' : '50px';
+        item.style.width = size;
+        item.style.height = size;
+        item.style.objectFit = 'cover';
+        item.style.borderRadius = '50%';
+        item.style.position = 'absolute';
+        item.style.left = '0';
+        item.style.top = '0';
+        item.style.transform = 'translate(-50%, -50%)';
+        item.style.animation = `orbit 10.4s ease-out forwards`;
 
-        if (type === 'flowers') {
-            // Create flower shower effect
-            const showerContainer = document.createElement('div');
-            showerContainer.className = 'offering-shower';
-            
-            // Add multiple flower particles
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    const particle = createFlowerParticle();
-                    showerContainer.appendChild(particle);
-                    
-                    // Remove particle after animation
-                    particle.addEventListener('animationend', () => {
-                        particle.remove();
-                    });
-                }, i * 100);
-            }
-            
-            animationContainer.appendChild(showerContainer);
-        } else {
-            // Add rotation animation for other offerings
-            animatedOffering.classList.add('offering-rotation');
-        }
-
-        animationContainer.appendChild(animatedOffering);
-        document.body.appendChild(animationContainer);
+        animationContainer.appendChild(item);
+        
+        // Attach animation container to the deity image container
+        const selectedDeity = document.getElementById('selectedDeity');
+        selectedDeity.appendChild(animationContainer);
 
         // Remove animation elements after completion
         setTimeout(() => {
             animationContainer.remove();
-        }, 3000);
+        }, 11400);
 
         // Play offering sound
         playOfferingSound();
