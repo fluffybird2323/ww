@@ -5,15 +5,15 @@ const deities = [
         image: 'https://www.templepurohit.com/wp-content/uploads/2015/07/Lord-Ganesha-Hindu-Gods-and-Deities.jpg'
     },
     {
-        name: 'Lord Shiva',
+        name: 'Shiva parivar',
         image: 'https://rukminim2.flixcart.com/image/850/1000/ked56kw0-0/poster/l/v/3/medium-god020-lord-shiva-family-wall-poster-lord-shivaji-hd-original-imafv29auterbtpj.jpeg?q=20&crop=false'
     },
     {
-        name: 'Goddess Lakshmi',
+        name: 'Lakshmi Narayana',
         image: 'https://i.pinimg.com/736x/56/29/86/5629863a8b88dc98f1a66e4f841ec7b8.jpg'
     },
     {
-        name: 'Lord Krishna',
+        name: 'Radha Krishna',
         image: 'https://i.pinimg.com/1200x/40/60/1b/40601b0bd068ce1bcf8239afdf9a3ad7.jpg'
     }
 ];
