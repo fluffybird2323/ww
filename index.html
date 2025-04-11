@@ -6,54 +6,145 @@
     <title>Online Mandir</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        @keyframes spin {
+        @-webkit-keyframes spin {
             from {
+                -webkit-transform: rotate(0deg);
                 transform: rotate(0deg);
             }
             to {
+                -webkit-transform: rotate(360deg);
                 transform: rotate(360deg);
             }
         }
 
-        @keyframes orbit {
-            0% {
-                transform: translateY(calc(var(--orbit-radius) * 1.2)) rotate(0deg);
-                opacity: 1;
+        @keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
             }
-            5% {
-                transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
-                opacity: 1;
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
             }
-            95% {
-                transform: rotate(2520deg) translateX(var(--orbit-radius)) rotate(-2520deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(calc(var(--orbit-radius) * 1.2)) rotate(0deg);
-                opacity: 0;
-            }
+        }
+
+        @-webkit-keyframes orbit-move {
+            0%   { -webkit-transform: rotate(0deg); transform: rotate(0deg); opacity: 1; }
+            5%   { -webkit-transform: rotate(0deg); transform: rotate(0deg); opacity: 1; }
+            15%  { -webkit-transform: rotate(179deg); transform: rotate(179deg); opacity: 1; }
+            25%  { -webkit-transform: rotate(358deg); transform: rotate(358deg); opacity: 1; }
+            35%  { -webkit-transform: rotate(537deg); transform: rotate(537deg); opacity: 1; }
+            45%  { -webkit-transform: rotate(716deg); transform: rotate(716deg); opacity: 1; }
+            55%  { -webkit-transform: rotate(895deg); transform: rotate(895deg); opacity: 1; }
+            65%  { -webkit-transform: rotate(1074deg); transform: rotate(1074deg); opacity: 1; }
+            75%  { -webkit-transform: rotate(1253deg); transform: rotate(1253deg); opacity: 1; }
+            85%  { -webkit-transform: rotate(1432deg); transform: rotate(1432deg); opacity: 1; }
+            95%  { -webkit-transform: rotate(1611deg); transform: rotate(1611deg); opacity: 1; }
+            100% { -webkit-transform: rotate(1611deg); transform: rotate(1611deg); opacity: 0; } /* End rotation, fade out */
+        }
+
+        @keyframes orbit-move {
+            0%   { -webkit-transform: rotate(0deg); transform: rotate(0deg); opacity: 1; }
+            5%   { -webkit-transform: rotate(0deg); transform: rotate(0deg); opacity: 1; }
+            15%  { -webkit-transform: rotate(179deg); transform: rotate(179deg); opacity: 1; }
+            25%  { -webkit-transform: rotate(358deg); transform: rotate(358deg); opacity: 1; }
+            35%  { -webkit-transform: rotate(537deg); transform: rotate(537deg); opacity: 1; }
+            45%  { -webkit-transform: rotate(716deg); transform: rotate(716deg); opacity: 1; }
+            55%  { -webkit-transform: rotate(895deg); transform: rotate(895deg); opacity: 1; }
+            65%  { -webkit-transform: rotate(1074deg); transform: rotate(1074deg); opacity: 1; }
+            75%  { -webkit-transform: rotate(1253deg); transform: rotate(1253deg); opacity: 1; }
+            85%  { -webkit-transform: rotate(1432deg); transform: rotate(1432deg); opacity: 1; }
+            95%  { -webkit-transform: rotate(1611deg); transform: rotate(1611deg); opacity: 1; }
+            100% { -webkit-transform: rotate(1611deg); transform: rotate(1611deg); opacity: 0; } /* End rotation, fade out */
+        }
+
+        @-webkit-keyframes orbit-orient {
+            0%   { -webkit-transform: translate(-50%, -50%) rotate(0deg); transform: translate(-50%, -50%) rotate(0deg); }
+            5%   { -webkit-transform: translate(-50%, -50%) rotate(0deg); transform: translate(-50%, -50%) rotate(0deg); }
+            15%  { -webkit-transform: translate(-50%, -50%) rotate(-179deg); transform: translate(-50%, -50%) rotate(-179deg); }
+            25%  { -webkit-transform: translate(-50%, -50%) rotate(-358deg); transform: translate(-50%, -50%) rotate(-358deg); }
+            35%  { -webkit-transform: translate(-50%, -50%) rotate(-537deg); transform: translate(-50%, -50%) rotate(-537deg); }
+            45%  { -webkit-transform: translate(-50%, -50%) rotate(-716deg); transform: translate(-50%, -50%) rotate(-716deg); }
+            55%  { -webkit-transform: translate(-50%, -50%) rotate(-895deg); transform: translate(-50%, -50%) rotate(-895deg); }
+            65%  { -webkit-transform: translate(-50%, -50%) rotate(-1074deg); transform: translate(-50%, -50%) rotate(-1074deg); }
+            75%  { -webkit-transform: translate(-50%, -50%) rotate(-1253deg); transform: translate(-50%, -50%) rotate(-1253deg); }
+            85%  { -webkit-transform: translate(-50%, -50%) rotate(-1432deg); transform: translate(-50%, -50%) rotate(-1432deg); }
+            95%  { -webkit-transform: translate(-50%, -50%) rotate(-1611deg); transform: translate(-50%, -50%) rotate(-1611deg); }
+            100% { -webkit-transform: translate(-50%, -50%) rotate(-1611deg); transform: translate(-50%, -50%) rotate(-1611deg); } /* End orientation */
+        }
+
+        @keyframes orbit-orient {
+            0%   { -webkit-transform: translate(-50%, -50%) rotate(0deg); transform: translate(-50%, -50%) rotate(0deg); }
+            5%   { -webkit-transform: translate(-50%, -50%) rotate(0deg); transform: translate(-50%, -50%) rotate(0deg); }
+            15%  { -webkit-transform: translate(-50%, -50%) rotate(-179deg); transform: translate(-50%, -50%) rotate(-179deg); }
+            25%  { -webkit-transform: translate(-50%, -50%) rotate(-358deg); transform: translate(-50%, -50%) rotate(-358deg); }
+            35%  { -webkit-transform: translate(-50%, -50%) rotate(-537deg); transform: translate(-50%, -50%) rotate(-537deg); }
+            45%  { -webkit-transform: translate(-50%, -50%) rotate(-716deg); transform: translate(-50%, -50%) rotate(-716deg); }
+            55%  { -webkit-transform: translate(-50%, -50%) rotate(-895deg); transform: translate(-50%, -50%) rotate(-895deg); }
+            65%  { -webkit-transform: translate(-50%, -50%) rotate(-1074deg); transform: translate(-50%, -50%) rotate(-1074deg); }
+            75%  { -webkit-transform: translate(-50%, -50%) rotate(-1253deg); transform: translate(-50%, -50%) rotate(-1253deg); }
+            85%  { -webkit-transform: translate(-50%, -50%) rotate(-1432deg); transform: translate(-50%, -50%) rotate(-1432deg); }
+            95%  { -webkit-transform: translate(-50%, -50%) rotate(-1611deg); transform: translate(-50%, -50%) rotate(-1611deg); }
+            100% { -webkit-transform: translate(-50%, -50%) rotate(-1611deg); transform: translate(-50%, -50%) rotate(-1611deg); } /* End orientation */
         }
 
         .offering-animation {
             position: absolute;
             top: 50%;
             left: 50%;
+            width: 0; /* Container is just a reference point at the center */
+            height: 0;
+            -webkit-transform: translate(-50%, -50%); /* Center the container */
             transform: translate(-50%, -50%);
             z-index: 1000;
             pointer-events: none;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-perspective: 1000;
+            perspective: 1000;
+        }
+
+        .offering-mover {
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 0; /* Position mover at the container's center */
+            left: 0;
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+            /* animation: orbit-move applied via JS */
         }
 
         .selected-deity {
             position: relative;
+            overflow: visible;
         }
 
-        .offering-animation img {
+        .offering-animation .offering-item-animated {
             border: none;
             outline: none;
+            position: absolute;
+            top: 0; /* Position relative to the mover's origin */
+            left: var(--orbit-radius);
+            /* Center the image visually on its point AND apply counter-rotation */
+            -webkit-transform: translate(-50%, -50%); /* Center first */
+            transform: translate(-50%, -50%);
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            /* perspective handled by parent */
+            /* animation: orbit-orient applied via JS */
         }
     </style>
 </head>
 <body>
+<div class="background-container">
+    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/moon2.png" alt="">
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="clouds"></div>
+</div>
     <div class="container">
         <header>
             <h1>Online Mandir</h1>

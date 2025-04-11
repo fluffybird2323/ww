@@ -38,6 +38,24 @@ const offerings = {
     }
 };
 
+// Function to check time and toggle night mode
+function updateNightMode() {
+    const currentHour = new Date().getHours();
+    const body = document.body;
+    // Night time is 7 PM (19) to 5:59 AM (exclusive of 6)
+    if (currentHour >= 19 || currentHour < 6) {
+        if (!body.classList.contains('night-mode')) {
+            body.classList.add('night-mode');
+            console.log("Night mode activated.");
+        }
+    } else {
+        if (body.classList.contains('night-mode')) {
+            body.classList.remove('night-mode');
+            console.log("Night mode deactivated.");
+        }
+    }
+}
+
 // Initialize the website
 document.addEventListener('DOMContentLoaded', () => {
     const deityGrid = document.getElementById('deityGrid');
@@ -146,11 +164,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.offering-buttons').classList.add('visible');
         document.querySelector('.offering-display').classList.add('visible');
         
-        // Scroll to top of the page
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        // Safari-compatible smooth scroll
+        const start = window.pageYOffset;
+        const startTime = performance.now();
+        const duration = 1000;
+
+        function animation(currentTime) {
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            
+            window.scrollTo(0, start * (1 - progress));
+            
+            if (progress < 1) {
+                requestAnimationFrame(animation);
+            }
+        }
+        
+        requestAnimationFrame(animation);
         
         // Add click event to close enlarged view
         selectedDeity.addEventListener('click', () => {
@@ -185,35 +215,38 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add to offering display
         offeringDisplay.appendChild(offeringElement);
 
-        // Create animation container
+        // Create animation container (reference point)
         const animationContainer = document.createElement('div');
         animationContainer.className = 'offering-animation';
-        
-        // Set the orbit radius based on the deity image size
-        const deityRect = deityImage.getBoundingClientRect();
-        const orbitRadius = Math.min(deityRect.width, deityRect.height) * 0.3; // Reduced to 30% of the smaller dimension
-        animationContainer.style.setProperty('--orbit-radius', `${orbitRadius}px`);
-        
-        // Create single offering item
+
+        // Create mover element for orbital rotation
+        const mover = document.createElement('div');
+        mover.className = 'offering-mover';
+        mover.style.animation = `orbit-move 10.4s ease-out forwards`;
+
+        // Create single offering item (img) for translation & orientation
         const item = document.createElement('img');
         item.src = offering.image;
-        // Make fruits 200% bigger than other offerings
         const size = type === 'fruits' ? '80px' : '40px';
         item.style.width = size;
         item.style.height = size;
         item.style.objectFit = 'cover';
         item.style.borderRadius = '50%';
-        item.style.position = 'absolute';
-        item.style.left = '50%';
-        item.style.top = '50%';
-        item.style.transform = 'translate(-50%, -50%)';
-        item.style.animation = `orbit 10.4s ease-out forwards`;
-        item.classList.add('orbiting'); // Add orbiting class
+        item.className = 'offering-item-animated';
 
-        animationContainer.appendChild(item);
-        
-        // Attach animation container to the deity image container
+        // Set the orbit radius as a CSS variable on the item for the orient animation
+        const deityRect = deityImage.getBoundingClientRect();
+        const orbitRadius = Math.min(deityRect.width, deityRect.height) * 0.3;
+        item.style.setProperty('--orbit-radius', `${orbitRadius}px`);
+        item.style.animation = `orbit-orient 10.4s ease-out forwards`;
+
+        // Append item to mover, mover to container
+        mover.appendChild(item);
+        animationContainer.appendChild(mover);
+
+        // Position the animation container relative to the deity image
         const selectedDeity = document.getElementById('selectedDeity');
+        selectedDeity.style.position = 'relative'; // Ensure parent is relative
         selectedDeity.appendChild(animationContainer);
 
         // Debug logging
@@ -227,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Remove animation elements after completion
         setTimeout(() => {
             animationContainer.remove();
-        }, 11400);
+        }, 11400); // Matches animation duration + buffer
 
         // Play offering sound
         playOfferingSound();
@@ -239,6 +272,12 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.volume = 0.3;
         audio.play().catch(error => console.log('Audio play failed:', error));
     }
+
+    // Initial check for night mode on load
+    updateNightMode();
+
+    // Periodically check time to update night mode (e.g., every 5 minutes)
+    setInterval(updateNightMode, 5 * 60 * 1000);
 
     // Initial population of deity grid
     populateDeityGrid();
