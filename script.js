@@ -227,16 +227,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create single offering item (img) for translation & orientation
         const item = document.createElement('img');
         item.src = offering.image;
-        const size = type === 'fruits' ? '80px' : '40px';
-        item.style.width = size;
-        item.style.height = size;
         item.style.objectFit = 'cover';
         item.style.borderRadius = '50%';
         item.className = 'offering-item-animated';
 
         // Set the orbit radius as a CSS variable on the item for the orient animation
         const deityRect = deityImage.getBoundingClientRect();
-        const orbitRadius = Math.min(deityRect.width, deityRect.height) * 0.3;
+        const orbitRadius = Math.min(deityRect.width, deityRect.height) * 0.4;
         item.style.setProperty('--orbit-radius', `${orbitRadius}px`);
         item.style.animation = `orbit-orient 10.4s ease-out forwards`;
 
