@@ -371,16 +371,128 @@ footer {
     }
 }
 
+/* Animation for offerings */
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes float {
+    0% {
+        -webkit-transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
 .offering-animation {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    pointer-events: none;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.offering-animation img {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    animation: float 2s ease-out forwards;
+    -webkit-animation: float 2s ease-out forwards;
+}
+
+/* Flower particle animation */
+@keyframes float-up {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes float-up {
+    0% {
+        -webkit-transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.flower-particle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url('flower.png') no-repeat center center;
+    background-size: contain;
+    animation: float-up 2s ease-out forwards;
+    -webkit-animation: float-up 2s ease-out forwards;
+}
+
+/* Enlarged deity animation */
+@keyframes enlarge {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+@-webkit-keyframes enlarge {
+    0% {
+        -webkit-transform: scale(1);
+    }
+    100% {
+        -webkit-transform: scale(1.2);
+    }
+}
+
+.selected-deity.enlarged {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    animation: enlarge 0.3s ease-out;
+    -webkit-animation: enlarge 0.3s ease-out;
+}
+
+/* Offering orbit animation */
+@keyframes orbit {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes orbit {
+    0% {
+        -webkit-transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
+    }
+}
+
+.offering-animation img {
+    animation: orbit 10.4s ease-out forwards;
+    -webkit-animation: orbit 10.4s ease-out forwards;
 } 
