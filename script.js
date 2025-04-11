@@ -208,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.style.top = '50%';
         item.style.transform = 'translate(-50%, -50%)';
         item.style.animation = `orbit 10.4s ease-out forwards`;
+        item.classList.add('orbiting'); // Add orbiting class
 
         animationContainer.appendChild(item);
         

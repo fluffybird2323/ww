@@ -410,8 +410,34 @@ footer {
     height: 40px;
     object-fit: cover;
     border-radius: 50%;
-    animation: float 2s ease-out forwards;
-    -webkit-animation: float 2s ease-out forwards;
+    left: 50%;
+    top: 50%;
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+/* Offering orbit animation */
+@keyframes orbit {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(100px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes orbit {
+    0% {
+        -webkit-transform: translate(-50%, -50%) rotate(0deg) translateX(100px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translate(-50%, -50%) rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+}
+
+.offering-animation img.orbiting {
+    animation: orbit 10.4s linear infinite;
+    -webkit-animation: orbit 10.4s linear infinite;
 }
 
 /* Flower particle animation */
@@ -471,28 +497,4 @@ footer {
     -webkit-transform: scale(1.2);
     animation: enlarge 0.3s ease-out;
     -webkit-animation: enlarge 0.3s ease-out;
-}
-
-/* Offering orbit animation */
-@keyframes orbit {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
-    }
-}
-
-@-webkit-keyframes orbit {
-    0% {
-        -webkit-transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
-    }
-}
-
-.offering-animation img {
-    animation: orbit 10.4s ease-out forwards;
-    -webkit-animation: orbit 10.4s ease-out forwards;
 } 
